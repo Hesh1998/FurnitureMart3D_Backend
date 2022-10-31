@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
@@ -79,5 +80,11 @@ public class UserController {
             System.out.println("Exception in find Passwords in User Controller");
         }
         return userPasswordList;
+    }
+
+    @GetMapping(value = "/findbyId/{userID}", produces = APPLICATION_JSON_VALUE)
+    public User findById(@PathVariable Integer userID){
+        Optional<User> user =repository.findById(userID);
+        return user.get();
     }
 }
