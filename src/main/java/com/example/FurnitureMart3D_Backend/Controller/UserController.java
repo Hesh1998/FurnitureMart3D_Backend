@@ -1,6 +1,7 @@
 package com.example.FurnitureMart3D_Backend.Controller;
 
 import com.example.FurnitureMart3D_Backend.Dto.User.EmailDto;
+import com.example.FurnitureMart3D_Backend.Dto.User.IdDto;
 import com.example.FurnitureMart3D_Backend.Dto.User.PasswordDto;
 import com.example.FurnitureMart3D_Backend.Dto.User.UsernameDto;
 import com.example.FurnitureMart3D_Backend.Model.User;
@@ -82,9 +83,24 @@ public class UserController {
         return userPasswordList;
     }
 
+    @GetMapping( value = "/getAllUserIds" , produces = APPLICATION_JSON_VALUE)
+    public List<IdDto> findUserIds(){
+        List<IdDto> userIdList = new ArrayList<>();
+        try {
+            List<User> userList = repository.findAll();
+            for (User user: userList) {
+                userIdList.add(new IdDto(user.getId()));
+            }
+        }catch (Exception e){
+            System.out.println("Exception in find Ids in User Controller");
+        }
+        return userIdList;
+    }
+
     @GetMapping(value = "/findbyId/{userID}", produces = APPLICATION_JSON_VALUE)
     public User findById(@PathVariable Integer userID){
         Optional<User> user =repository.findById(userID);
         return user.get();
     }
+    // http://localhost:8080/findbyId/1
 }
