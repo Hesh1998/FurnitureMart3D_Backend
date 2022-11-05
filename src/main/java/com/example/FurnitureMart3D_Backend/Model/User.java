@@ -18,6 +18,7 @@ public class User {
     // Other attributes - Buyer
     private String username;
     private String email;
+    private String dp;
     private String password;
     private String accountType;
     private String contactNo;

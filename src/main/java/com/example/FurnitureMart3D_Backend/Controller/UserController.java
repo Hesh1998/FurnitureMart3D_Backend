@@ -97,10 +97,22 @@ public class UserController {
         return userIdList;
     }
 
+    // http://localhost:8080/findbyId/1
     @GetMapping(value = "/findbyId/{userID}", produces = APPLICATION_JSON_VALUE)
     public User findById(@PathVariable Integer userID){
         Optional<User> user =repository.findById(userID);
         return user.get();
     }
-    // http://localhost:8080/findbyId/1
+
+    @DeleteMapping(value = "/deleteUser/{id}")
+    public boolean DeleteById(@PathVariable Integer id){
+        boolean response = false;
+        try {
+            repository.deleteById(id);
+            response=true;
+        }catch (Exception e){
+            System.out.println("Exception in delete by Id controller !!!!");
+        }
+        return response;
+    }
 }
