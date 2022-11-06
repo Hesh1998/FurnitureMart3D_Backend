@@ -1,9 +1,6 @@
 package com.example.FurnitureMart3D_Backend.Controller;
 
-import com.example.FurnitureMart3D_Backend.Dto.User.EmailDto;
-import com.example.FurnitureMart3D_Backend.Dto.User.IdDto;
-import com.example.FurnitureMart3D_Backend.Dto.User.PasswordDto;
-import com.example.FurnitureMart3D_Backend.Dto.User.UsernameDto;
+import com.example.FurnitureMart3D_Backend.Dto.User.*;
 import com.example.FurnitureMart3D_Backend.Model.User;
 import com.example.FurnitureMart3D_Backend.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,12 +26,6 @@ public class UserController {
         repository.save(user);
         return "Success";
     }
-
-    /*
-    @GetMapping("/usersList")
-    public List<User> getUsers() {
-        return repository.findAll();
-    }*/
 
     @GetMapping("/noOfUsers")
     public int getUsers() {
@@ -114,5 +105,19 @@ public class UserController {
             System.out.println("Exception in delete by Id controller !!!!");
         }
         return response;
+    }
+
+    @GetMapping( value = "/getAllStoreNames" , produces = APPLICATION_JSON_VALUE)
+    public List<StoreNameDto> findStoreNames(){
+        List<StoreNameDto> storeNameList = new ArrayList<>();
+        try {
+            List<User> userList = repository.findAll();
+            for (User user: userList) {
+                storeNameList.add(new StoreNameDto(user.getStoreName()));
+            }
+        }catch (Exception e){
+            System.out.println("Exception in find Store names in User Controller");
+        }
+        return storeNameList;
     }
 }
