@@ -1,6 +1,7 @@
 package com.example.FurnitureMart3D_Backend.Controller;
 
 import com.example.FurnitureMart3D_Backend.Dto.User.*;
+import com.example.FurnitureMart3D_Backend.Model.Product;
 import com.example.FurnitureMart3D_Backend.Model.User;
 import com.example.FurnitureMart3D_Backend.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -120,4 +121,39 @@ public class UserController {
         }
         return storeNameList;
     }
+
+    @PostMapping(value = "/addProduct", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+    public boolean addProduct(@RequestBody UserProductDto userProductDto){
+        boolean response = false;
+        try {
+            // find user
+            Optional<User> existingUser = repository.findById(userProductDto.getUserId());
+            // create a product
+            Product newProduct = new Product(userProductDto.getProductId(), userProductDto.getProductName());
+            // add the product to the user
+            existingUser.get().getProductList().add(newProduct);
+            // save the user
+            repository.save(existingUser.get());
+            response = true;
+        }catch (Exception e){
+            System.out.println("Exception in Adding product controller !!!");
+        }
+        return response;
+    }
+
+
+    @GetMapping(value = "/findUserProducts/{id}", produces = APPLICATION_JSON_VALUE)
+    public List<Product> findUserProducts(@PathVariable Integer id){
+        List<Product> productList = new ArrayList<>();
+        try {
+            Optional<User> existingUser = repository.findById(id);
+            for (Product product:existingUser.get().getProductList()) {
+                productList.add(new Product(product.getId(), product.getProduct_Name()));
+            }
+        }catch (Exception e){
+            System.out.println("Exception in find user Product list controller !!!!");
+        }
+        return productList;
+    }
 }
+

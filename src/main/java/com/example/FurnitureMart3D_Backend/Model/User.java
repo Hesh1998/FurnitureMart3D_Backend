@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,4 +34,24 @@ public class User {
     private String paymentAccountNo;
     private String paymentAccountBankName;
     private String paymentAccountBankBranchName;
+
+    // product list
+    private List<Product> productList = new ArrayList<>();
+
+    public User(int id, String username, String email, String dp, String password, String accountType, String contactNo, String deliveryAddress, String storeName, String storeAddress, String paymentAccountName, String paymentAccountNo, String paymentAccountBankName, String paymentAccountBankBranchName) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.dp = dp;
+        this.password = password;
+        this.accountType = accountType;
+        this.contactNo = contactNo;
+        this.deliveryAddress = deliveryAddress;
+        this.storeName = storeName;
+        this.storeAddress = storeAddress;
+        this.paymentAccountName = paymentAccountName;
+        this.paymentAccountNo = paymentAccountNo;
+        this.paymentAccountBankName = paymentAccountBankName;
+        this.paymentAccountBankBranchName = paymentAccountBankBranchName;
+    }
 }
