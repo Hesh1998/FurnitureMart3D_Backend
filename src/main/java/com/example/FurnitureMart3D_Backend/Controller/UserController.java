@@ -123,13 +123,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/addProduct", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-    public boolean addProduct(@RequestBody UserProductDto userProductDto){
+    public boolean addProduct(@RequestBody Product product){
         boolean response = false;
         try {
             // find user
-            Optional<User> existingUser = repository.findById(userProductDto.getUserId());
+            Optional<User> existingUser = repository.findById(product.getUserId());
             // create a product
-            Product newProduct = new Product(userProductDto.getProductId(), userProductDto.getProductName());
+            Product newProduct = new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getPrice(), product.getDeliveryFee(), product.getArrivalDays(), product.getMaterial(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getClr4(), product.getClr4Img(), product.getClr5(), product.getClr5Img(), product.getAdd1Img(), product.getAdd2Img(), product.getAdd3Img(), product.getVid1(), product.getVid2());
             // add the product to the user
             existingUser.get().getProductList().add(newProduct);
             // save the user
@@ -148,7 +148,7 @@ public class UserController {
         try {
             Optional<User> existingUser = repository.findById(id);
             for (Product product:existingUser.get().getProductList()) {
-                productList.add(new Product(product.getId(), product.getProduct_Name()));
+                productList.add(new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getPrice(), product.getDeliveryFee(), product.getArrivalDays(), product.getMaterial(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getClr4(), product.getClr4Img(), product.getClr5(), product.getClr5Img(), product.getAdd1Img(), product.getAdd2Img(), product.getAdd3Img(), product.getVid1(), product.getVid2()));
             }
         }catch (Exception e){
             System.out.println("Exception in find user Product list controller !!!!");
