@@ -1,5 +1,6 @@
 package com.example.FurnitureMart3D_Backend.Controller;
 
+import com.example.FurnitureMart3D_Backend.Dto.Product.DeleteProductDto;
 import com.example.FurnitureMart3D_Backend.Dto.User.*;
 import com.example.FurnitureMart3D_Backend.Model.Product;
 import com.example.FurnitureMart3D_Backend.Model.User;
@@ -129,14 +130,14 @@ public class UserController {
             // find user
             Optional<User> existingUser = repository.findById(product.getUserId());
             // create a product
-            Product newProduct = new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getPrice(), product.getDeliveryFee(), product.getArrivalDays(), product.getMaterial(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getClr4(), product.getClr4Img(), product.getClr5(), product.getClr5Img(), product.getAdd1Img(), product.getAdd2Img(), product.getAdd3Img(), product.getVid1(), product.getVid2());
+            Product newProduct = new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getInOrder(), product.getTotalSold(), product.getPrice(), product.getDeliveryFee(), product.getArrivalDays(), product.getMaterial(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getAdd1Img(), product.getAdd2Img(), product.getVid1());
             // add the product to the user
             existingUser.get().getProductList().add(newProduct);
             // save the user
             repository.save(existingUser.get());
             response = true;
         }catch (Exception e){
-            System.out.println("Exception in Adding product controller !!!");
+            System.out.println("Exception in adding product !!!!");
         }
         return response;
     }
@@ -148,12 +149,33 @@ public class UserController {
         try {
             Optional<User> existingUser = repository.findById(id);
             for (Product product:existingUser.get().getProductList()) {
-                productList.add(new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getPrice(), product.getDeliveryFee(), product.getArrivalDays(), product.getMaterial(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getClr4(), product.getClr4Img(), product.getClr5(), product.getClr5Img(), product.getAdd1Img(), product.getAdd2Img(), product.getAdd3Img(), product.getVid1(), product.getVid2()));
+                productList.add(new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getInOrder(), product.getTotalSold(), product.getPrice(), product.getDeliveryFee(), product.getArrivalDays(), product.getMaterial(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getAdd1Img(), product.getAdd2Img(), product.getVid1()));
             }
         }catch (Exception e){
             System.out.println("Exception in find user Product list controller !!!!");
         }
         return productList;
+    }
+
+    @DeleteMapping(value = "/deleteProduct", produces = APPLICATION_JSON_VALUE)
+    public boolean DeleteProduct(@RequestBody DeleteProductDto deleteProductDto){
+        boolean response = false;
+        try {
+            Optional<User> existingUser = repository.findById(deleteProductDto.getUserId());
+            Product deletedProduct = null;
+            for ( Product product : existingUser.get().getProductList()) {
+                if (product.getItemId() == deleteProductDto.getProductId()){
+                    deletedProduct = product;
+                }
+            }
+            existingUser.get().getProductList().remove(deletedProduct); // delete the product in existingUser object
+            repository.save(existingUser.get()); // update the existingUser in database
+            response = true;
+        }catch (Exception e){
+            System.out.println("Exception in delete product controller");
+            e.printStackTrace();
+        }
+        return response;
     }
 }
 
