@@ -4,6 +4,7 @@ import com.example.FurnitureMart3D_Backend.Dto.Product.DeleteProductDto;
 import com.example.FurnitureMart3D_Backend.Dto.User.*;
 import com.example.FurnitureMart3D_Backend.Model.Product;
 import com.example.FurnitureMart3D_Backend.Model.User;
+import com.example.FurnitureMart3D_Backend.Repository.ProductRepository;
 import com.example.FurnitureMart3D_Backend.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 public class UserController {
     @Autowired
     private UserRepository repository;
+    @Autowired
+    private ProductRepository productRepository;
 
 
     @PostMapping("/registerUserAsBuyer")
@@ -177,5 +180,56 @@ public class UserController {
         }
         return response;
     }
+
+    @PostMapping(value = "/updateProduct", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+    public boolean updateProduct(@RequestBody Product product ) {
+        boolean response = false;
+        Product searchedProduct = null;
+        try {
+            Optional<User> existingUser = repository.findById(product.getUserId());
+            for ( Product product1 : existingUser.get().getProductList()) {
+                if (product1.getItemId() == product.getItemId()){
+                    searchedProduct = product1;
+                }
+            }
+
+            // Setting details of the selected product object
+            searchedProduct.setItemName(product.getItemName());
+            searchedProduct.setLiving(product.getLiving());
+            searchedProduct.setDining(product.getDining());
+            searchedProduct.setBedroom(product.getBedroom());
+            searchedProduct.setOffice(product.getOffice());
+            searchedProduct.setOutdoor(product.getOutdoor());
+            searchedProduct.setOther(product.getOther());
+            searchedProduct.setCondition(product.getCondition());
+            searchedProduct.setDescription(product.getDescription());
+            searchedProduct.setDimensions(product.getDimensions());
+            searchedProduct.setStockQuantity(product.getStockQuantity());
+            searchedProduct.setInOrder(product.getInOrder());
+            searchedProduct.setTotalSold(product.getTotalSold());
+            searchedProduct.setPrice(product.getPrice());
+            searchedProduct.setDeliveryFee(product.getDeliveryFee());
+            searchedProduct.setArrivalDays(product.getArrivalDays());
+            searchedProduct.setMaterial(product.getMaterial());
+            searchedProduct.setClr1(product.getClr1());
+            searchedProduct.setClr1Img(product.getClr1Img());
+            searchedProduct.setClr2(product.getClr2());
+            searchedProduct.setClr2Img(product.getClr2Img());
+            searchedProduct.setClr3(product.getClr3());
+            searchedProduct.setClr3Img(product.getClr3Img());
+            searchedProduct.setAdd1Img(product.getAdd1Img());
+            searchedProduct.setAdd2Img(product.getAdd2Img());
+            searchedProduct.setVid1(product.getVid1());
+
+            // save the user
+            repository.save(existingUser.get());
+
+            response = true;
+        }catch (Exception e){
+            System.out.println("Exception in update product controller");
+        }
+        return response;
+    }
+
 }
 
