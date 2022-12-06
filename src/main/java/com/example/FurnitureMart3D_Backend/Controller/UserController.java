@@ -133,7 +133,7 @@ public class UserController {
             // find user
             Optional<User> existingUser = repository.findById(product.getUserId());
             // create a product
-            Product newProduct = new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getInOrder(), product.getTotalSold(), product.getPrice(), product.getDeliveryFee(), product.getArrivalDays(), product.getMaterial(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getAdd1Img(), product.getAdd2Img(), product.getVid1());
+            Product newProduct = new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getChair(), product.getTable(), product.getSofa(), product.getCupboard(), product.getBed(), product.getBench(), product.getBookcase(), product.getDesk(), product.getOtherT(), product.getClassy(), product.getAntique(), product.getTraditional(), product.getModern(), product.getContemporary(), product.getTransitional(), product.getCoastal(), product.getMinimalist(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getInOrder(), product.getTotalSold(), product.getPrice(), product.getDeliveryColombo(), product.getArrivalColombo(), product.getDeliveryGampaha(), product.getArrivalGampaha(), product.getDeliveryKalutara(), product.getArrivalKalutara(), product.getDeliveryKandy(), product.getArrivalKandy(), product.getDeliveryMatale(), product.getArrivalMatale(), product.getDeliveryNuwaraEliya(), product.getArrivalNuwaraEliya(), product.getDeliveryGalle(), product.getArrivalGalle(), product.getDeliveryMatara(), product.getArrivalMatara(), product.getDeliveryHambantota(), product.getArrivalHambantota(), product.getDeliveryJaffna(), product.getArrivalJaffna(), product.getDeliveryKilinochchi(), product.getArrivalKilinochchi(), product.getDeliveryMannar(), product.getArrivalMannar(), product.getDeliveryVavuniya(), product.getArrivalVavuniya(), product.getDeliveryMullaitivu(), product.getArrivalMullaitivu(), product.getDeliveryBatticallo(), product.getArrivalBatticallo(), product.getDeliveryAmpara(), product.getArrivalAmpara(), product.getDeliveryTrincomalee(), product.getArrivalTrincomalee(), product.getDeliveryKurunegala(), product.getArrivalKurunegala(), product.getDeliveryPuttalam(), product.getArrivalPuttalam(), product.getDeliveryAnuradhapura(), product.getArrivalAnuradhapura(), product.getDeliveryPolonnaruwa(), product.getArrivalPolonnaruwa(), product.getDeliveryBadulla(), product.getArrivalBadulla(), product.getDeliveryMoneragala(), product.getArrivalMoneragala(), product.getDeliveryRatnapura(), product.getArrivalRatnapura(), product.getDeliveryKegalle(), product.getArrivalKegalle(), product.getMaterial(), product.getMaterialDescription(), product.getSubMaterials(), product.getSubMaterialsDescription(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getAdd1Img(), product.getAdd2Img(), product.getVid1());
             // add the product to the user
             existingUser.get().getProductList().add(newProduct);
             // save the user
@@ -152,7 +152,7 @@ public class UserController {
         try {
             Optional<User> existingUser = repository.findById(id);
             for (Product product:existingUser.get().getProductList()) {
-                productList.add(new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getInOrder(), product.getTotalSold(), product.getPrice(), product.getDeliveryFee(), product.getArrivalDays(), product.getMaterial(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getAdd1Img(), product.getAdd2Img(), product.getVid1()));
+                productList.add(new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getChair(), product.getTable(), product.getSofa(), product.getCupboard(), product.getBed(), product.getBench(), product.getBookcase(), product.getDesk(), product.getOtherT(), product.getClassy(), product.getAntique(), product.getTraditional(), product.getModern(), product.getContemporary(), product.getTransitional(), product.getCoastal(), product.getMinimalist(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getInOrder(), product.getTotalSold(), product.getPrice(), product.getDeliveryColombo(), product.getArrivalColombo(), product.getDeliveryGampaha(), product.getArrivalGampaha(), product.getDeliveryKalutara(), product.getArrivalKalutara(), product.getDeliveryKandy(), product.getArrivalKandy(), product.getDeliveryMatale(), product.getArrivalMatale(), product.getDeliveryNuwaraEliya(), product.getArrivalNuwaraEliya(), product.getDeliveryGalle(), product.getArrivalGalle(), product.getDeliveryMatara(), product.getArrivalMatara(), product.getDeliveryHambantota(), product.getArrivalHambantota(), product.getDeliveryJaffna(), product.getArrivalJaffna(), product.getDeliveryKilinochchi(), product.getArrivalKilinochchi(), product.getDeliveryMannar(), product.getArrivalMannar(), product.getDeliveryVavuniya(), product.getArrivalVavuniya(), product.getDeliveryMullaitivu(), product.getArrivalMullaitivu(), product.getDeliveryBatticallo(), product.getArrivalBatticallo(), product.getDeliveryAmpara(), product.getArrivalAmpara(), product.getDeliveryTrincomalee(), product.getArrivalTrincomalee(), product.getDeliveryKurunegala(), product.getArrivalKurunegala(), product.getDeliveryPuttalam(), product.getArrivalPuttalam(), product.getDeliveryAnuradhapura(), product.getArrivalAnuradhapura(), product.getDeliveryPolonnaruwa(), product.getArrivalPolonnaruwa(), product.getDeliveryBadulla(), product.getArrivalBadulla(), product.getDeliveryMoneragala(), product.getArrivalMoneragala(), product.getDeliveryRatnapura(), product.getArrivalRatnapura(), product.getDeliveryKegalle(), product.getArrivalKegalle(), product.getMaterial(), product.getMaterialDescription(), product.getSubMaterials(), product.getSubMaterialsDescription(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getAdd1Img(), product.getAdd2Img(), product.getVid1()));
             }
         }catch (Exception e){
             System.out.println("Exception in find user Product list controller !!!!");
@@ -195,12 +195,33 @@ public class UserController {
 
             // Setting details of the selected product object
             searchedProduct.setItemName(product.getItemName());
+
             searchedProduct.setLiving(product.getLiving());
             searchedProduct.setDining(product.getDining());
             searchedProduct.setBedroom(product.getBedroom());
             searchedProduct.setOffice(product.getOffice());
             searchedProduct.setOutdoor(product.getOutdoor());
             searchedProduct.setOther(product.getOther());
+
+            searchedProduct.setChair(product.getChair());
+            searchedProduct.setTable(product.getTable());
+            searchedProduct.setSofa(product.getSofa());
+            searchedProduct.setCupboard(product.getCupboard());
+            searchedProduct.setBed(product.getBed());
+            searchedProduct.setBench(product.getBench());
+            searchedProduct.setBookcase(product.getBookcase());
+            searchedProduct.setDesk(product.getDesk());
+            searchedProduct.setOtherT(product.getOtherT());
+
+            searchedProduct.setClassy(product.getClassy());
+            searchedProduct.setAntique(product.getAntique());
+            searchedProduct.setTraditional(product.getTraditional());
+            searchedProduct.setModern(product.getModern());
+            searchedProduct.setContemporary(product.getContemporary());
+            searchedProduct.setTransitional(product.getTransitional());
+            searchedProduct.setCoastal(product.getCoastal());
+            searchedProduct.setMinimalist(product.getMinimalist());
+
             searchedProduct.setCondition(product.getCondition());
             searchedProduct.setDescription(product.getDescription());
             searchedProduct.setDimensions(product.getDimensions());
@@ -208,9 +229,63 @@ public class UserController {
             searchedProduct.setInOrder(product.getInOrder());
             searchedProduct.setTotalSold(product.getTotalSold());
             searchedProduct.setPrice(product.getPrice());
-            searchedProduct.setDeliveryFee(product.getDeliveryFee());
-            searchedProduct.setArrivalDays(product.getArrivalDays());
+
+            searchedProduct.setDeliveryColombo(product.getDeliveryColombo());
+            searchedProduct.setDeliveryGampaha(product.getDeliveryGampaha());
+            searchedProduct.setDeliveryKalutara(product.getDeliveryKalutara());
+            searchedProduct.setDeliveryKandy(product.getDeliveryKandy());
+            searchedProduct.setDeliveryMatale(product.getDeliveryMatale());
+            searchedProduct.setDeliveryNuwaraEliya(product.getDeliveryNuwaraEliya());
+            searchedProduct.setDeliveryGalle(product.getDeliveryGalle());
+            searchedProduct.setDeliveryMatara(product.getDeliveryMatara());
+            searchedProduct.setDeliveryHambantota(product.getDeliveryHambantota());
+            searchedProduct.setDeliveryJaffna(product.getDeliveryJaffna());
+            searchedProduct.setDeliveryKilinochchi(product.getDeliveryKilinochchi());
+            searchedProduct.setDeliveryMannar(product.getDeliveryMannar());
+            searchedProduct.setDeliveryVavuniya(product.getDeliveryVavuniya());
+            searchedProduct.setDeliveryMullaitivu(product.getDeliveryMullaitivu());
+            searchedProduct.setDeliveryBatticallo(product.getDeliveryBatticallo());
+            searchedProduct.setDeliveryAmpara(product.getDeliveryAmpara());
+            searchedProduct.setDeliveryTrincomalee(product.getDeliveryTrincomalee());
+            searchedProduct.setDeliveryKurunegala(product.getDeliveryKurunegala());
+            searchedProduct.setDeliveryPuttalam(product.getDeliveryPuttalam());
+            searchedProduct.setDeliveryAnuradhapura(product.getDeliveryAnuradhapura());
+            searchedProduct.setDeliveryPolonnaruwa(product.getDeliveryPolonnaruwa());
+            searchedProduct.setDeliveryBadulla(product.getDeliveryBadulla());
+            searchedProduct.setDeliveryMoneragala(product.getDeliveryMoneragala());
+            searchedProduct.setDeliveryRatnapura(product.getDeliveryRatnapura());
+            searchedProduct.setDeliveryKegalle(product.getDeliveryKegalle());
+
+            searchedProduct.setArrivalColombo(product.getArrivalColombo());
+            searchedProduct.setArrivalGampaha(product.getArrivalGampaha());
+            searchedProduct.setArrivalKalutara(product.getArrivalKalutara());
+            searchedProduct.setArrivalKandy(product.getArrivalKandy());
+            searchedProduct.setArrivalMatale(product.getArrivalMatale());
+            searchedProduct.setArrivalNuwaraEliya(product.getArrivalNuwaraEliya());
+            searchedProduct.setArrivalGalle(product.getArrivalGalle());
+            searchedProduct.setArrivalMatara(product.getArrivalMatara());
+            searchedProduct.setArrivalHambantota(product.getArrivalHambantota());
+            searchedProduct.setArrivalJaffna(product.getArrivalJaffna());
+            searchedProduct.setArrivalKilinochchi(product.getArrivalKilinochchi());
+            searchedProduct.setArrivalMannar(product.getArrivalMannar());
+            searchedProduct.setArrivalVavuniya(product.getArrivalVavuniya());
+            searchedProduct.setArrivalMullaitivu(product.getArrivalMullaitivu());
+            searchedProduct.setArrivalBatticallo(product.getArrivalBatticallo());
+            searchedProduct.setArrivalAmpara(product.getArrivalAmpara());
+            searchedProduct.setArrivalTrincomalee(product.getArrivalTrincomalee());
+            searchedProduct.setArrivalKurunegala(product.getArrivalKurunegala());
+            searchedProduct.setArrivalPuttalam(product.getArrivalPuttalam());
+            searchedProduct.setArrivalAnuradhapura(product.getArrivalAnuradhapura());
+            searchedProduct.setArrivalPolonnaruwa(product.getArrivalPolonnaruwa());
+            searchedProduct.setArrivalBadulla(product.getArrivalBadulla());
+            searchedProduct.setArrivalMoneragala(product.getArrivalMoneragala());
+            searchedProduct.setArrivalRatnapura(product.getArrivalRatnapura());
+            searchedProduct.setArrivalKegalle(product.getArrivalKegalle());
+
             searchedProduct.setMaterial(product.getMaterial());
+            searchedProduct.setMaterialDescription(product.getMaterialDescription());
+            searchedProduct.setSubMaterials(product.getSubMaterials());
+            searchedProduct.setSubMaterialsDescription(product.getSubMaterialsDescription());
             searchedProduct.setClr1(product.getClr1());
             searchedProduct.setClr1Img(product.getClr1Img());
             searchedProduct.setClr2(product.getClr2());

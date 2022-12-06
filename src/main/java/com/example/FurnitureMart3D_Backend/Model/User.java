@@ -26,10 +26,12 @@ public class User {
     private String accountType;
     private String contactNo;
     private String deliveryAddress;
+    private String buyerDistrict;
 
     // Other attributes - Seller (Initially null, later can extend to Seller)
     private String storeName;
     private String storeAddress;
+    private String storeDistrict;
     private String paymentAccountName;
     private String paymentAccountNo;
     private String paymentAccountBankName;
@@ -38,7 +40,7 @@ public class User {
     // product list
     private List<Product> productList = new ArrayList<>();
 
-    public User(int id, String username, String email, String dp, String password, String accountType, String contactNo, String deliveryAddress, String storeName, String storeAddress, String paymentAccountName, String paymentAccountNo, String paymentAccountBankName, String paymentAccountBankBranchName) {
+    public User(int id, String username, String email, String dp, String password, String accountType, String contactNo, String deliveryAddress, String buyerDistrict, String storeName, String storeAddress, String storeDistrict, String paymentAccountName, String paymentAccountNo, String paymentAccountBankName, String paymentAccountBankBranchName) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -47,8 +49,10 @@ public class User {
         this.accountType = accountType;
         this.contactNo = contactNo;
         this.deliveryAddress = deliveryAddress;
+        this.buyerDistrict = buyerDistrict;
         this.storeName = storeName;
         this.storeAddress = storeAddress;
+        this.storeDistrict = storeDistrict;
         this.paymentAccountName = paymentAccountName;
         this.paymentAccountNo = paymentAccountNo;
         this.paymentAccountBankName = paymentAccountBankName;
