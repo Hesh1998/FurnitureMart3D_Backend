@@ -306,5 +306,22 @@ public class UserController {
         return response;
     }
 
+    @GetMapping(value = "/viewProductDetails", produces = APPLICATION_JSON_VALUE)
+    public Product viewProductDetails(@RequestBody DeleteProductDto deleteProductDto) {
+        Product searchedProduct = null;
+        try {
+            Optional<User> existingUser = repository.findById(deleteProductDto.getUserId());
+            for ( Product product1 : existingUser.get().getProductList()) {
+                if (product1.getItemId() == deleteProductDto.getProductId()){
+                    searchedProduct = product1;
+                }
+            }
+        }catch (Exception e){
+            System.out.println("Exception in update product controller");
+        }
+
+        return searchedProduct;
+    }
+
 }
 
