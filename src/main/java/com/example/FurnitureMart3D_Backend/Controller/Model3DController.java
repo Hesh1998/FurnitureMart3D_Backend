@@ -40,4 +40,23 @@ public class Model3DController {
 
         return modelSearched;
     }
+
+    @DeleteMapping(value = "/delete3DModel")
+    public boolean delete3DModel(@RequestBody Model3DDto model3DDto) {
+        boolean response = false;
+        try {
+            List<Model3D> allUserModelList = repository.findAll();
+            for ( Model3D model : allUserModelList) {
+                if (model.getUserId() == model3DDto.getUserId() & model.getProductId() == model3DDto.getProductId() && model.getClrId() == model3DDto.getClrId()){
+                    repository.delete(model);
+                    response=true;
+                    break;
+                }
+            }
+        }catch (Exception e){
+            System.out.println("Exception in delete 3D Model");
+        }
+
+        return response;
+    }
 }
