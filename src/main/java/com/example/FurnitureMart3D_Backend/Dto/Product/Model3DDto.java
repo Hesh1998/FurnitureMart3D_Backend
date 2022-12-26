@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
-public class DeleteProductDto {
+public class Model3DDto {
     private int userId;
     private int productId;
+    private int clrId;
 }
