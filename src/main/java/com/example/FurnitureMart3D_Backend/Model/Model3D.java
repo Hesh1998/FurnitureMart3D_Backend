@@ -11,6 +11,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "3d_models")
 public class Model3D {
+    @Id
+    private int id;
+
     private int userId;
     private int productId;
     private int clrId;

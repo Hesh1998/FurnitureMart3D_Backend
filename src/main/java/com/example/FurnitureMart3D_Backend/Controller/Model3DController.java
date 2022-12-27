@@ -1,11 +1,16 @@
 package com.example.FurnitureMart3D_Backend.Controller;
 
 import com.example.FurnitureMart3D_Backend.Dto.Product.Model3DDto;
+import com.example.FurnitureMart3D_Backend.Dto.Product.Model3DIdsDto;
+import com.example.FurnitureMart3D_Backend.Dto.User.UsernameDto;
 import com.example.FurnitureMart3D_Backend.Model.Model3D;
+import com.example.FurnitureMart3D_Backend.Model.User;
 import com.example.FurnitureMart3D_Backend.Repository.Model3DRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
@@ -48,7 +53,7 @@ public class Model3DController {
             List<Model3D> allUserModelList = repository.findAll();
             for ( Model3D model : allUserModelList) {
                 if (model.getUserId() == model3DDto.getUserId() & model.getProductId() == model3DDto.getProductId() && model.getClrId() == model3DDto.getClrId()){
-                    repository.delete(model);
+                    repository.deleteById(model.getId());
                     response=true;
                     break;
                 }
@@ -58,5 +63,19 @@ public class Model3DController {
         }
 
         return response;
+    }
+
+    @GetMapping( value = "/getAll3DModelIds" , produces = APPLICATION_JSON_VALUE)
+    public List<Model3DIdsDto> find3DModelIds(){
+        List<Model3DIdsDto> idList = new ArrayList<>();
+        try {
+            List<Model3D> modelList = repository.findAll();
+            for (Model3D model: modelList) {
+                idList.add(new Model3DIdsDto(model.getId()));
+            }
+        }catch (Exception e){
+            System.out.println("Exception in find 3D Model Ids");
+        }
+        return idList;
     }
 }
