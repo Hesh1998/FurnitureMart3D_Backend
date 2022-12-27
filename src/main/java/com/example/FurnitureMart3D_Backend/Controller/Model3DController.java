@@ -4,6 +4,7 @@ import com.example.FurnitureMart3D_Backend.Dto.Product.Model3DDto;
 import com.example.FurnitureMart3D_Backend.Dto.Product.Model3DIdsDto;
 import com.example.FurnitureMart3D_Backend.Dto.User.UsernameDto;
 import com.example.FurnitureMart3D_Backend.Model.Model3D;
+import com.example.FurnitureMart3D_Backend.Model.Product;
 import com.example.FurnitureMart3D_Backend.Model.User;
 import com.example.FurnitureMart3D_Backend.Repository.Model3DRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,22 +29,21 @@ public class Model3DController {
         return "Success";
     }
 
-    @GetMapping(value = "/view3DModel", produces = APPLICATION_JSON_VALUE)
-    public Model3D view3DModel(@RequestBody Model3DDto model3DDto) {
-        Model3D modelSearched = null;
+    @GetMapping(value = "/getUser3DModels/{userId}", produces = APPLICATION_JSON_VALUE)
+    public List<Model3D> view3DModel(@PathVariable Integer userId) {
+        List<Model3D> userModels = new ArrayList<>();
         try {
             List<Model3D> allUserModelList = repository.findAll();
             for ( Model3D model : allUserModelList) {
-                if (model.getUserId() == model3DDto.getUserId() & model.getProductId() == model3DDto.getProductId() && model.getClrId() == model3DDto.getClrId()){
-                    modelSearched = model;
-                    break;
+                if (model.getUserId() == userId){
+                    userModels.add(model);
                 }
             }
         }catch (Exception e){
             System.out.println("Exception in view 3D Model");
         }
 
-        return modelSearched;
+        return userModels;
     }
 
     @DeleteMapping(value = "/delete3DModel")
