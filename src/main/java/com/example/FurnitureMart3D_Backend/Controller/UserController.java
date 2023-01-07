@@ -16,6 +16,8 @@ import java.util.Optional;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
+
+// Controller class for user (buyer, seller, products)
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -26,17 +28,22 @@ public class UserController {
     private ProductRepository productRepository;
 
 
+    // Adds a new user (buyer)
     @PostMapping("/registerUserAsBuyer")
     public String Save(@RequestBody User user){
         repository.save(user);
         return "Success";
     }
 
+
+    // Gets the number of all registered users (buyers and buyers + sellers)
     @GetMapping("/noOfUsers")
     public int getUsers() {
         return (int) repository.count();
     }
 
+
+    // Gets all usernames of users
     @GetMapping( value = "/getAllUsernames" , produces = APPLICATION_JSON_VALUE)
     public List<UsernameDto> findUserNames(){
         List<UsernameDto> userNameList = new ArrayList<>();
@@ -51,6 +58,8 @@ public class UserController {
         return userNameList;
     }
 
+
+    // Gets all emails of users
     @GetMapping( value = "/getAllUserEmails" , produces = APPLICATION_JSON_VALUE)
     public List<EmailDto> findUserEmails(){
         List<EmailDto> userEmailList = new ArrayList<>();
@@ -65,6 +74,8 @@ public class UserController {
         return userEmailList;
     }
 
+
+    // Gets all passwords of users
     @GetMapping( value = "/getAllUserPasswords" , produces = APPLICATION_JSON_VALUE)
     public List<PasswordDto> findUserPasswords(){
         List<PasswordDto> userPasswordList = new ArrayList<>();
@@ -79,6 +90,8 @@ public class UserController {
         return userPasswordList;
     }
 
+
+    // Gets all user ids
     @GetMapping( value = "/getAllUserIds" , produces = APPLICATION_JSON_VALUE)
     public List<IdDto> findUserIds(){
         List<IdDto> userIdList = new ArrayList<>();
@@ -93,13 +106,16 @@ public class UserController {
         return userIdList;
     }
 
-    // http://localhost:8080/findbyId/1
+
+    // Gets all user details based on user id
     @GetMapping(value = "/findbyId/{userID}", produces = APPLICATION_JSON_VALUE)
     public User findById(@PathVariable Integer userID){
         Optional<User> user =repository.findById(userID);
         return user.get();
     }
 
+
+    // Deletes a user
     @DeleteMapping(value = "/deleteUser/{id}")
     public boolean DeleteById(@PathVariable Integer id){
         boolean response = false;
@@ -112,6 +128,8 @@ public class UserController {
         return response;
     }
 
+
+    // Gets all store names
     @GetMapping( value = "/getAllStoreNames" , produces = APPLICATION_JSON_VALUE)
     public List<StoreNameDto> findStoreNames(){
         List<StoreNameDto> storeNameList = new ArrayList<>();
@@ -126,17 +144,19 @@ public class UserController {
         return storeNameList;
     }
 
+
+    // Adds a product
     @PostMapping(value = "/addProduct", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
     public boolean addProduct(@RequestBody Product product){
         boolean response = false;
         try {
-            // find user
+            // Find user
             Optional<User> existingUser = repository.findById(product.getUserId());
-            // create a product
+            // Create a product
             Product newProduct = new Product(product.getUserId(), product.getItemId(), product.getItemName(), product.getLiving(), product.getDining(), product.getBedroom(), product.getOffice(), product.getOutdoor(), product.getOther(), product.getChair(), product.getTable(), product.getSofa(), product.getCupboard(), product.getBed(), product.getBench(), product.getBookcase(), product.getDesk(), product.getOtherT(), product.getClassy(), product.getAntique(), product.getTraditional(), product.getModern(), product.getContemporary(), product.getTransitional(), product.getCoastal(), product.getMinimalist(), product.getCondition(), product.getDescription(), product.getDimensions(), product.getStockQuantity(), product.getInOrder(), product.getTotalSold(), product.getPrice(), product.getDeliveryColombo(), product.getArrivalColombo(), product.getDeliveryGampaha(), product.getArrivalGampaha(), product.getDeliveryKalutara(), product.getArrivalKalutara(), product.getDeliveryKandy(), product.getArrivalKandy(), product.getDeliveryMatale(), product.getArrivalMatale(), product.getDeliveryNuwaraEliya(), product.getArrivalNuwaraEliya(), product.getDeliveryGalle(), product.getArrivalGalle(), product.getDeliveryMatara(), product.getArrivalMatara(), product.getDeliveryHambantota(), product.getArrivalHambantota(), product.getDeliveryJaffna(), product.getArrivalJaffna(), product.getDeliveryKilinochchi(), product.getArrivalKilinochchi(), product.getDeliveryMannar(), product.getArrivalMannar(), product.getDeliveryVavuniya(), product.getArrivalVavuniya(), product.getDeliveryMullaitivu(), product.getArrivalMullaitivu(), product.getDeliveryBatticallo(), product.getArrivalBatticallo(), product.getDeliveryAmpara(), product.getArrivalAmpara(), product.getDeliveryTrincomalee(), product.getArrivalTrincomalee(), product.getDeliveryKurunegala(), product.getArrivalKurunegala(), product.getDeliveryPuttalam(), product.getArrivalPuttalam(), product.getDeliveryAnuradhapura(), product.getArrivalAnuradhapura(), product.getDeliveryPolonnaruwa(), product.getArrivalPolonnaruwa(), product.getDeliveryBadulla(), product.getArrivalBadulla(), product.getDeliveryMoneragala(), product.getArrivalMoneragala(), product.getDeliveryRatnapura(), product.getArrivalRatnapura(), product.getDeliveryKegalle(), product.getArrivalKegalle(), product.getMaterial(), product.getMaterialDescription(), product.getSubMaterials(), product.getSubMaterialsDescription(), product.getClr1(), product.getClr1Img(), product.getClr2(), product.getClr2Img(), product.getClr3(), product.getClr3Img(), product.getAdd1Img(), product.getAdd2Img(), product.getVid1());
-            // add the product to the user
+            // Add the product to the user
             existingUser.get().getProductList().add(newProduct);
-            // save the user
+            // Save the user
             repository.save(existingUser.get());
             response = true;
         }catch (Exception e){
@@ -146,6 +166,7 @@ public class UserController {
     }
 
 
+    // Gets all products added by a specific seller
     @GetMapping(value = "/findUserProducts/{id}", produces = APPLICATION_JSON_VALUE)
     public List<Product> findUserProducts(@PathVariable Integer id){
         List<Product> productList = new ArrayList<>();
@@ -160,6 +181,8 @@ public class UserController {
         return productList;
     }
 
+
+    // Deletes a product
     @DeleteMapping(value = "/deleteProduct", produces = APPLICATION_JSON_VALUE)
     public boolean DeleteProduct(@RequestBody DeleteProductDto deleteProductDto){
         boolean response = false;
@@ -171,8 +194,10 @@ public class UserController {
                     deletedProduct = product;
                 }
             }
-            existingUser.get().getProductList().remove(deletedProduct); // delete the product in existingUser object
-            repository.save(existingUser.get()); // update the existingUser in database
+            // Delete the product in existingUser object
+            existingUser.get().getProductList().remove(deletedProduct);
+            // Update the existingUser in database
+            repository.save(existingUser.get());
             response = true;
         }catch (Exception e){
             System.out.println("Exception in delete product controller");
@@ -181,6 +206,8 @@ public class UserController {
         return response;
     }
 
+
+    // Update a product added by a specific seller
     @PostMapping(value = "/updateProduct", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
     public boolean updateProduct(@RequestBody Product product ) {
         boolean response = false;
@@ -296,7 +323,7 @@ public class UserController {
             searchedProduct.setAdd2Img(product.getAdd2Img());
             searchedProduct.setVid1(product.getVid1());
 
-            // save the user
+            // Save the user
             repository.save(existingUser.get());
 
             response = true;
@@ -306,6 +333,8 @@ public class UserController {
         return response;
     }
 
+
+    // Gets details related to a specific product
     @GetMapping(value = "/viewProductDetails", produces = APPLICATION_JSON_VALUE)
     public Product viewProductDetails(@RequestBody DeleteProductDto deleteProductDto) {
         Product searchedProduct = null;

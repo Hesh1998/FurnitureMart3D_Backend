@@ -16,6 +16,8 @@ import java.util.Optional;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
+
+// Controller class for products added by sellers
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -25,6 +27,8 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+
+    // Gets all products added by all sellers
     @GetMapping( value = "/getAllProducts" , produces = APPLICATION_JSON_VALUE)
     public List<Product> findAllProducts(){
         List<Product> productList = new ArrayList<>();

@@ -5,12 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
+// Model class for products added by sellers
 @Document @Data @AllArgsConstructor @NoArgsConstructor
 public class Product {
-    private int userId;
+    private int userId; // Seller id
     private int itemId;
     private String itemName;
 
+    // Location
     private String living;
     private String dining;
     private String bedroom;
@@ -18,6 +21,7 @@ public class Product {
     private String outdoor;
     private String other;
 
+    // Item type
     private String chair;
     private String table;
     private String sofa;
@@ -28,6 +32,7 @@ public class Product {
     private String desk;
     private String otherT;
 
+    // Category
     private String classy;
     private String antique;
     private String traditional;
@@ -40,11 +45,12 @@ public class Product {
     private String condition;
     private String description;
     private String dimensions;
-    private int stockQuantity;
-    private int inOrder;
-    private int totalSold;
+    private int stockQuantity; // Total available stock
+    private int inOrder; // No. of items ordered, but order not yet complete
+    private int totalSold; // Total sold items (order completed)
     private double price;
 
+    // Delivery fee and arrival time(days) for each district
     private double deliveryColombo;
     private int arrivalColombo;
     private double deliveryGampaha;
@@ -96,6 +102,7 @@ public class Product {
     private double deliveryKegalle;
     private int arrivalKegalle;
 
+    // Material details
     private String material;
     private String materialDescription;
     private String subMaterials;
@@ -107,6 +114,7 @@ public class Product {
     private String clr3;
     private String clr3Img;
 
+    // Additional graphics
     private String add1Img;
     private String add2Img;
     private String vid1;

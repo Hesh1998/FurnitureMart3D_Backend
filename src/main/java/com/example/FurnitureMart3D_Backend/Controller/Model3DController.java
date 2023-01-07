@@ -16,6 +16,8 @@ import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
+
+// Controller class for 3d models of products
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -23,12 +25,16 @@ public class Model3DController {
     @Autowired
     private Model3DRepository repository;
 
+
+    // Adds a 3d model
     @PostMapping("/add3DModel")
     public String Save(@RequestBody Model3D model){
         repository.save(model);
         return "Success";
     }
 
+
+    // Gets all 3d models for a specific buyer (for all products)
     @GetMapping(value = "/getUser3DModels/{userId}", produces = APPLICATION_JSON_VALUE)
     public List<Model3D> view3DModel(@PathVariable Integer userId) {
         List<Model3D> userModels = new ArrayList<>();
@@ -46,6 +52,8 @@ public class Model3DController {
         return userModels;
     }
 
+
+    //  Deletes a specific 3d model
     @DeleteMapping(value = "/delete3DModel")
     public boolean delete3DModel(@RequestBody Model3DDto model3DDto) {
         boolean response = false;
@@ -65,6 +73,8 @@ public class Model3DController {
         return response;
     }
 
+
+    // Gets ids of all 3d models
     @GetMapping( value = "/getAll3DModelIds" , produces = APPLICATION_JSON_VALUE)
     public List<Model3DIdsDto> find3DModelIds(){
         List<Model3DIdsDto> idList = new ArrayList<>();

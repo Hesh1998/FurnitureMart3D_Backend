@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+// Data transfer object used to update, delete a product
 @Data @AllArgsConstructor @NoArgsConstructor
 public class DeleteProductDto {
     private int userId;

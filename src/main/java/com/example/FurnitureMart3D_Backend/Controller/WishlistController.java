@@ -14,6 +14,8 @@ import java.util.Optional;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
+
+// Controller class for Wishlist
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
@@ -23,23 +25,27 @@ public class WishlistController {
     @Autowired
     private CWItemRepository itemRepository;
 
+
+    // Creates a wishlist when a buyer registers
     @PostMapping("/createWishlist")
     public String createWishlist(@RequestBody Wishlist wishlist){
         repository.save(wishlist);
         return "Success";
     }
 
+
+    // Adds an item to the wishlist
     @PostMapping(value = "/addItemToWishlist", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
     public boolean addToWishlist(@RequestBody CWItem item){
         boolean response = false;
         try {
-            // find wishlist
+            // Find wishlist
             Optional<Wishlist> existingWishlist = repository.findById(item.getId());
-            // create a item
+            // Create a item
             CWItem newItem = new CWItem(item.getId(), item.getSellerID(), item.getProductID());
-            // add the item to wishlist
+            // Add the item to wishlist
             existingWishlist.get().getWishlistList().add(newItem);
-            // save the wishlist
+            // Save the wishlist
             repository.save(existingWishlist.get());
             response = true;
         }catch (Exception e){
@@ -48,6 +54,8 @@ public class WishlistController {
         return response;
     }
 
+
+    // Gets all items in the wishlist for a specific buyer
     @GetMapping(value = "/findWishlistItems/{id}", produces = APPLICATION_JSON_VALUE)
     public List<CWItem> findWishlistItems(@PathVariable Integer id){
         List<CWItem> itemList = new ArrayList<>();
@@ -62,6 +70,8 @@ public class WishlistController {
         return itemList;
     }
 
+
+    // Deletes an item in the wishlist
     @DeleteMapping(value = "/deleteWishlistItem", produces = APPLICATION_JSON_VALUE)
     public boolean deleteWishlistItem(@RequestBody CWItem deleteItemDetails){
         boolean response = false;
@@ -83,6 +93,8 @@ public class WishlistController {
         return response;
     }
 
+
+    // Deletes entire wishlist when a user removes the account
     @DeleteMapping(value = "/deleteWishlist/{id}")
     public boolean deleteWishlist(@PathVariable Integer id){
         boolean response = false;

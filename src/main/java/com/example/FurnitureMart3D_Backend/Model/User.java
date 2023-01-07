@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// Model class for user (initially buyer, later extended to buyer and seller)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,9 +39,10 @@ public class User {
     private String paymentAccountBankName;
     private String paymentAccountBankBranchName;
 
-    // product list
+    // Product list
     private List<Product> productList = new ArrayList<>();
 
+    // Constructor without a value for productList
     public User(int id, String username, String email, String dp, String password, String accountType, String contactNo, String deliveryAddress, String buyerDistrict, String storeName, String storeAddress, String storeDistrict, String paymentAccountName, String paymentAccountNo, String paymentAccountBankName, String paymentAccountBankBranchName) {
         this.id = id;
         this.username = username;
