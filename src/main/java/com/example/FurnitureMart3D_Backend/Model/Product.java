@@ -108,10 +108,13 @@ public class Product {
     private String subMaterials;
     private String subMaterialsDescription;
     private String clr1;
+    private int stockClr1;
     private String clr1Img;
     private String clr2;
+    private int stockClr2;
     private String clr2Img;
     private String clr3;
+    private int stockClr3;
     private String clr3Img;
 
     // Additional graphics
