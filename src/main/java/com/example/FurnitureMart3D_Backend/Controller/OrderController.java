@@ -28,4 +28,10 @@ public class OrderController {
         repository.save(order);
         return "Success";
     }
+
+    // Gets the number of total orders for all sellers in the system
+    @GetMapping("/noOfOrders")
+    public int getOrders() {
+        return (int) repository.count();
+    }
 }
