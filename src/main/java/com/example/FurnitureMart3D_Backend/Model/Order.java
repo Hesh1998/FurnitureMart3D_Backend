@@ -27,6 +27,7 @@ public class Order {
 
     // Other buyer details
     private String buyerEmail;
+    private String buyerName;
     private String buyerContactNo;
     private String buyerAddress;
     private String buyerDistrict;

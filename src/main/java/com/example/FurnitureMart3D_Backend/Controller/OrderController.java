@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
@@ -34,6 +33,7 @@ public class OrderController {
     // Gets the number of total orders for all sellers in the system
     @GetMapping("/noOfOrders")
     public int getOrders() {
+
         return (int) repository.count();
     }
 
